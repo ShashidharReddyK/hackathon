@@ -46,20 +46,20 @@ public class UserController {
     }
 
     @GetMapping("/getMembership")
-    public ResponseEntity<Membership> getMemberShip(@RequestBody final UserRequestDto userRequestDto) {
+    public ResponseEntity<Membership> getMembership(@RequestBody final UserRequestDto userRequestDto) {
         final String phone = userRequestDto.getPhone();
         return new ResponseEntity<>(userService.getMembership(phone), HttpStatus.OK);
     }
 
-    @PostMapping("/upgradeMemberShip")
-    public ResponseEntity<Membership> upgradeMemberShip(@RequestBody final UserRequestDto userRequestDto) {
+    @PostMapping("/upgradeMembership")
+    public ResponseEntity<Membership> upgradeMembership(@RequestBody final UserRequestDto userRequestDto) {
         final String phone = userRequestDto.getPhone();
         userService.updateMembership(phone, Membership.PREMIUM);
         return new ResponseEntity<>(Membership.PREMIUM, HttpStatus.OK);
     }
 
     @PostMapping("/downgradeMembership")
-    public ResponseEntity<Membership> downgradeMemberShip(@RequestBody UserRequestDto userRequestDto) {
+    public ResponseEntity<Membership> downgradeMembership(@RequestBody UserRequestDto userRequestDto) {
         final String phone = userRequestDto.getPhone();
         userService.updateMembership(phone, Membership.NORMAL);
         return new ResponseEntity<>(Membership.NORMAL, HttpStatus.OK);
