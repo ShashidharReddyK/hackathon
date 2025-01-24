@@ -15,11 +15,11 @@ public class Case extends BaseModel{
     private List<String> comments;
     private Action action;
 
-    public Case(final long orderId) {
+    public Case(final long orderId, final Action action) {
         super();
         this.orderId = orderId;
         caseStatus = CaseStatus.OPEN;
-        caseNumber = getRandomId();
+        caseNumber = this.getId();
         comments = new ArrayList<>();
         this.action = null;
     }

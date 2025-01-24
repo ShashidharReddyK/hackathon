@@ -25,11 +25,12 @@ public class OrderService {
     @Autowired
     private ProductRepository productRepository;
 
-    public void saveOrder(final List<Product> productList, final long userId) {
+    public Order saveOrder(final List<Product> productList, final long userId) {
         final Order order = new Order(productList, userId);
         final User user = userService.getUser(userId);
         user.getOrders().add(order);
         orderRepository.saveOrder(order);
+        return order;
     }
 
     public Order getOrder(final long orderid ) {
@@ -44,7 +45,7 @@ public class OrderService {
 
     public Order rescheduleOrder(final long orderId) {
         final Order order = orderRepository.getOrderById(orderId);
-        order.setOrderStatus(OrderStatus.ON_HOLD);
+        order.setOrderStatus(OrderStatus.IN_PROGRESS);
         return order;
     }
 

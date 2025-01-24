@@ -9,12 +9,14 @@ import java.util.HashMap;
 public class CaseRepository {
     private final HashMap<Long, Case> cases;
 
+
+
     public CaseRepository() {
         cases = new HashMap<>();
     }
 
-    public void saveCase(final long orderId, final Case orderCase) {
-        cases.put(orderId, orderCase);
+    public void saveCase(final Case orderCase) {
+        cases.put(orderCase.getId(), orderCase);
     }
 
     public Case getCase( final Long id) {

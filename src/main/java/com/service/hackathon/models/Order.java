@@ -1,6 +1,5 @@
 package com.service.hackathon.models;
 
-import com.service.hackathon.services.OrderService;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -14,8 +13,8 @@ public class Order extends BaseModel {
     private OrderStatus orderStatus;
     private long caseId;
     private long userId;
-    private long returnId;
-    private long exchangeId;
+    private Return aReturn;
+    private Exchange exchange;
 
     public Order(final List<Product> productList, final long userId) {
         super();

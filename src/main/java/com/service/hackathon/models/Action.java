@@ -5,5 +5,6 @@ public enum Action {
     EXCHANGE,
     RETURN,
     RESCHEDULE,
-    CANCEL_MEMBERSHIP
+    CANCEL_MEMBERSHIP,
+    UNKNOWN
 }

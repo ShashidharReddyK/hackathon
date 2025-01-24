@@ -1,5 +1,7 @@
 package com.service.hackathon.controllers;
 
+import com.service.hackathon.dtos.RequestDto;
+import com.service.hackathon.models.Action;
 import com.service.hackathon.models.Case;
 import com.service.hackathon.models.Order;
 import com.service.hackathon.models.Return;
@@ -28,31 +30,43 @@ public class CaseController {
     private UserService userService;
 
     @PostMapping("/createCase")
-    public ResponseEntity<Case> createCase(@RequestBody final long orderId,
-                                     @RequestBody final long userId) {
-        return new ResponseEntity<>(caseService.createCase(orderId), HttpStatus.OK);
+    public ResponseEntity<Case> createCase(@RequestBody final RequestDto requestDto) {
+        final long orderId = requestDto.getOrderId();
+        final Action action = requestDto.getAction();
+        return new ResponseEntity<>(caseService.createCase(orderId, action), HttpStatus.OK);
+    }
 
+    @PostMapping("/updateCommentsInCase")
+    public ResponseEntity<Case> updateCommentsInCase(@RequestBody final RequestDto requestDto) {
+        final String comment = requestDto.getComment();
+        final long caseId = requestDto.getCaseId();
+        final Case eCase= caseService.updateComments(caseId, comment);
+        return new ResponseEntity<>(eCase, HttpStatus.OK);
     }
 
     @PostMapping("/cancelOrder")
-    public ResponseEntity<Order> cancelOrder(@RequestBody final long orderId) {
+    public ResponseEntity<Order> cancelOrder(@RequestBody final RequestDto requestDto) {
+        final long orderId = requestDto.getOrderId();
         return new ResponseEntity<>(orderService.cancelOrder(orderId), HttpStatus.OK);
     }
 
     @PostMapping("/reschedule")
-    public ResponseEntity<Order> rescheduleOrder(@RequestBody final long orderId) {
+    public ResponseEntity<Order> rescheduleOrder(@RequestBody final RequestDto requestDto) {
+        final long orderId = requestDto.getOrderId();
         return new ResponseEntity<>(orderService.rescheduleOrder(orderId), HttpStatus.OK);
     }
 
     @PostMapping("/exchange")
-    public ResponseEntity<Order> createExchange(@RequestBody final long orderId,
-                               @RequestBody final long productId) {
+    public ResponseEntity<Order> createExchange(@RequestBody final RequestDto requestDto) {
+        final long orderId = requestDto.getOrderId();
+        final long productId = requestDto.getProductId();
         return new ResponseEntity<>(orderService.createExchange(orderId, productId), HttpStatus.OK);
     }
 
     @PostMapping("/return")
-    public ResponseEntity<Return> createReturn(@RequestBody final long orderId,
-                                               @RequestBody final long productId) {
+    public ResponseEntity<Return> createReturn(@RequestBody final RequestDto requestDto) {
+        final long orderId = requestDto.getOrderId();
+        final long productId = requestDto.getProductId();
         return new ResponseEntity<>(orderService.createReturn(orderId, productId), HttpStatus.OK);
     }
 }

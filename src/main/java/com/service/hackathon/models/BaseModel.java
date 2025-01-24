@@ -4,7 +4,6 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.time.LocalDate;
-import java.util.Random;
 
 @Getter
 @Setter
@@ -13,10 +12,10 @@ public class BaseModel {
     private LocalDate createdAt;
     private LocalDate updatedAt;
     private boolean isDeleted;
-    private final Random random = new Random();
+    static long random = 10000000L;
 
     protected long getRandomId() {
-        return random.nextLong();
+        return ++random;
     }
 
     public BaseModel() {

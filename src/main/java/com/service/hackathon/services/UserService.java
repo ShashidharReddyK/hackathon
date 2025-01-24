@@ -6,6 +6,8 @@ import com.service.hackathon.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class UserService {
     @Autowired
@@ -23,6 +25,10 @@ public class UserService {
 
     public User getUser(final String phone) {
         return userRepository.getUserByPhone(phone);
+    }
+
+    public List<User> getAllUsers() {
+        return userRepository.getAllUsers();
     }
 
     public Membership getMembership(final String phone) {
