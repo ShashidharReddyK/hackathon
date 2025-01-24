@@ -11,9 +11,10 @@ public class UserService {
     @Autowired
     private UserRepository userRepository;
 
-    public void saveUser(final String phone) {
+    public User saveUser(final String phone) {
         final User user = new User(phone);
         userRepository.saveUser(user);
+        return user;
     }
 
     public User getUser(final long userId) {

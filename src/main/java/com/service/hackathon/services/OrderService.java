@@ -36,19 +36,19 @@ public class OrderService {
         return orderRepository.getOrderById(orderid);
     }
 
-    public boolean cancelOrder(final long orderId) {
+    public Order cancelOrder(final long orderId) {
         final Order order = orderRepository.getOrderById(orderId);
         order.setOrderStatus(OrderStatus.CANCELLED);
-        return true;
+        return order;
     }
 
-    public boolean rescheduleOrder(final long orderId) {
+    public Order rescheduleOrder(final long orderId) {
         final Order order = orderRepository.getOrderById(orderId);
         order.setOrderStatus(OrderStatus.ON_HOLD);
-        return true;
+        return order;
     }
 
-    public boolean createExchange(final long orderId, final long productId) {
+    public Order createExchange(final long orderId, final long productId) {
         final Order order = orderRepository.getOrderById(orderId);
         Product exchangeProduct = null;
         for(Product product: order.getProductList()) {
@@ -57,9 +57,9 @@ public class OrderService {
                 break;
             }
         }
-        if(exchangeProduct == null) return false;
+        if(exchangeProduct == null) return null;
         final Exchange exchange = new Exchange(exchangeProduct, exchangeProduct);
-        return true;
+        return order;
     }
 
     public Return createReturn(final long orderId, final long productId) {

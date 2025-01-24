@@ -2,17 +2,17 @@ package com.service.hackathon.controllers;
 
 import com.service.hackathon.models.Case;
 import com.service.hackathon.models.Order;
-import com.service.hackathon.models.User;
+import com.service.hackathon.models.Return;
 import com.service.hackathon.services.CaseService;
 import com.service.hackathon.services.OrderService;
 import com.service.hackathon.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-
-import java.util.List;
+import org.springframework.web.bind.annotation.RequestBody;
 
 @Controller
 @RequestMapping("/cases")
@@ -28,30 +28,31 @@ public class CaseController {
     private UserService userService;
 
     @PostMapping("/createCase")
-    public Case createCase(@PathVariable("orderId") final long orderId,
-                           @PathVariable("usesrId") final long userId) {
-        return caseService.createCase(orderId);
+    public ResponseEntity<Case> createCase(@RequestBody final long orderId,
+                                     @RequestBody final long userId) {
+        return new ResponseEntity<>(caseService.createCase(orderId), HttpStatus.OK);
+
     }
 
     @PostMapping("/cancelOrder")
-    public void cancelOrder(@PathVariable("orderId") final long orderId) {
-        orderService.cancelOrder(orderId);
+    public ResponseEntity<Order> cancelOrder(@RequestBody final long orderId) {
+        return new ResponseEntity<>(orderService.cancelOrder(orderId), HttpStatus.OK);
     }
 
     @PostMapping("/reschedule")
-    public void rescheduleOrder(@PathVariable("orderId") final long orderId) {
-        orderService.rescheduleOrder(orderId);
+    public ResponseEntity<Order> rescheduleOrder(@RequestBody final long orderId) {
+        return new ResponseEntity<>(orderService.rescheduleOrder(orderId), HttpStatus.OK);
     }
 
     @PostMapping("/exchange")
-    public void createExchange(@PathVariable("orderId") final long orderId,
-                               @PathVariable("productId") final long productId) {
-        orderService.createExchange(orderId, productId);
+    public ResponseEntity<Order> createExchange(@RequestBody final long orderId,
+                               @RequestBody final long productId) {
+        return new ResponseEntity<>(orderService.createExchange(orderId, productId), HttpStatus.OK);
     }
 
-    @PostMapping("/exchange")
-    public void createReturn(@PathVariable("orderId") final long orderId,
-                             @PathVariable("productId") final long productId) {
-        orderService.createReturn(orderId, productId);
+    @PostMapping("/return")
+    public ResponseEntity<Return> createReturn(@RequestBody final long orderId,
+                                               @RequestBody final long productId) {
+        return new ResponseEntity<>(orderService.createReturn(orderId, productId), HttpStatus.OK);
     }
 }

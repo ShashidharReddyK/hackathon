@@ -9,7 +9,6 @@ import java.util.Random;
 @Getter
 @Setter
 public class BaseModel {
-    @Getter
     private long id;
     private LocalDate createdAt;
     private LocalDate updatedAt;
