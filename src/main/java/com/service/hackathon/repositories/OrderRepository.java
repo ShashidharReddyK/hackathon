@@ -7,7 +7,7 @@ import java.util.HashMap;
 
 @Repository
 public class OrderRepository {
-    private HashMap<Long, Order> orders;
+    private final HashMap<Long, Order> orders;
 
     public OrderRepository() {
         orders = new HashMap<>();

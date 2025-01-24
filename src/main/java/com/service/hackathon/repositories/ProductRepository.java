@@ -7,7 +7,7 @@ import java.util.HashMap;
 
 @Repository
 public class ProductRepository {
-    private HashMap<Long, Product> productHashMap;
+    private final HashMap<Long, Product> productHashMap;
 
     public ProductRepository() {
         productHashMap = new HashMap<>();

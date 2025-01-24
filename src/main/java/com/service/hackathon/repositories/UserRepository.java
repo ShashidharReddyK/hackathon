@@ -7,8 +7,8 @@ import java.util.HashMap;
 
 @Repository
 public class UserRepository {
-    private HashMap<Long, User> users;
-    private HashMap<String, Long> userIds;
+    private final HashMap<Long, User> users;
+    private final HashMap<String, Long> userIds;
 
 
     public UserRepository() {

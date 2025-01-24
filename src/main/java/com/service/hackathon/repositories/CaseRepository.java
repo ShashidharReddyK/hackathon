@@ -7,7 +7,7 @@ import java.util.HashMap;
 
 @Repository
 public class CaseRepository {
-    private HashMap<Long, Case> cases;
+    private final HashMap<Long, Case> cases;
 
     public CaseRepository() {
         cases = new HashMap<>();
